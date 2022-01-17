@@ -4,18 +4,20 @@
 console.log('🚀 This is it.');
 
 const MY_FAVORITE_BRANDS = [{
-  'name': 'Hopaal',
+  'name': 'hopaal',
   'url': 'https://hopaal.com/'
 }, {
-  'name': 'Loom',
+  'name': 'loom',
   'url': 'https://www.loom.fr'
 }, {
-  'name': 'ADRESSE',
+  'name': 'adresse',
   'url': 'https://adresse.paris/'
-}];
+}
+];
 
 console.table(MY_FAVORITE_BRANDS);
 console.log(MY_FAVORITE_BRANDS[0]);
+
 
 
 
@@ -33,7 +35,8 @@ console.log(MY_FAVORITE_BRANDS[0]);
 // 2. Log the variable
 
 
-
+var link = "https://www.loom.fr/products/le-t-shirt";
+console.log(link);
 
 
 /**
@@ -49,12 +52,35 @@ console.log(MY_FAVORITE_BRANDS[0]);
 // 1. Create a variable and assign it the number of products
 // 2. Log the variable
 
+var numberProducts = marketplace.length;
+console.log(numberProducts);
+
+
 
 // 🎯 TODO: Brands name
 // 1. Create a variable and assign it the list of brands name only
 // 2. Log the variable
 // 3. Log how many brands we have
 
+let brand_names = [];
+for (var i =0;i<marketplace.length;i++)
+{
+  if(!brand_names.includes(marketplace[i].brand))
+  {
+    brand_names.push(marketplace[i].brand);
+  }
+}
+brand_unique = new Set(brand_names)
+console.log(brand_names);
+
+
+//or 
+
+
+let brandsss =[];
+
+marketplace.forEach(product => brandsss.push(product.brand));
+unique = new Set(brandsss);
 
 // 🎯 TODO: Sort by price
 // 1. Create a function to sort the marketplace products by price
@@ -62,11 +88,31 @@ console.log(MY_FAVORITE_BRANDS[0]);
 // 3. Log the variable
 
 
+//let prices = [];
+function compare(a, b) {
+  return a.price - b.price;
+}
+var marketplacesort=marketplace;
+marketplacesort.sort(compare);
+
+
+
+
 // 🎯 TODO: Sort by date
 // 1. Create a function to sort the marketplace objects by products date
 // 2. Create a variable and assign it the list of products by date from recent to old
 // 3. Log the variable
 
+
+var maketplacedate = marketplace;
+marketplace.comparedate(function(a,b){
+  datea = new Date(a.date)
+  dateb = new Date(b.date)
+  return datea>dateb ? -1 : datea<dateb ? 1:0
+
+})
+
+marketplacedate.sort(comparedate);
 
 // 🎯 TODO: Filter a specific price range
 // 1. Filter the list of products between 50€ and 100€
