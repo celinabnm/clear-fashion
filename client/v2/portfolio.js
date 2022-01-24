@@ -128,7 +128,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Feature 1 :
 
 selectPage.addEventListener('change', event => {
-  fetchProducts(parseInt(event.target.value),currentPagination.pageCount)
+  fetchProducts(parseInt(event.target.value),currentPagination.pageSize)
     .then(setCurrentProducts)
     .then(() => render(currentProducts, currentPagination));
 });
+
+//sectionProducts.addEventListener()
+
