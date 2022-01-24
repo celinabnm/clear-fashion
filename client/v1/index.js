@@ -390,7 +390,7 @@ console.log(jacket);
 
 
 // we notice : 
-
+// When modifying jacket, the modifications are also done on bluejacket
 
 
 blueJacket = {
@@ -401,7 +401,9 @@ blueJacket = {
 
 // 3. Update `jacket` property with `favorite` to true WITHOUT changing blueJacket properties
 
-
+jacket = Object.assign({}, blueJacket);
+//again :
+jacket.favorite = true;
 
 
 
@@ -413,4 +415,8 @@ blueJacket = {
 
 // 🎯 TODO: Save in localStorage
 // 1. Save MY_FAVORITE_BRANDS in the localStorage
+
+window.localStorage.setItem("favorite brands", MY_FAVORITE_BRANDS);
+
 // 2. log the localStorage
+console.log(window.localStorage);
