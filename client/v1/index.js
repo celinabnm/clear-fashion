@@ -119,17 +119,13 @@ marketplacedate.sort(comparedate());
 // 2. Log the list
 
 
-<<<<<<< HEAD
 var filter = new Array();
 marketplace.forEach(product => { if(product.price>=50 && product.price <=100){filter.push(product)}} );
 console.log(filter);
 
-// 🎯 TODO: Average Basket
-// 1. Determine the average basket of the marketplace
-=======
+
 // 🎯 TODO: Average price
 // 1. Determine the average price of the marketplace
->>>>>>> dd4b33c698614b1db7b18c113bd14eda3051606f
 // 2. Log the average
 
 var average = 0.0;

@@ -122,3 +122,13 @@ document.addEventListener('DOMContentLoaded', async () => {
   setCurrentProducts(products);
   render(currentProducts, currentPagination);
 });
+
+
+
+// Feature 1 :
+
+selectPage.addEventListener('change', event => {
+  fetchProducts(parseInt(event.target.value),currentPagination.pageCount)
+    .then(setCurrentProducts)
+    .then(() => render(currentProducts, currentPagination));
+});
