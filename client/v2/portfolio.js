@@ -5,13 +5,20 @@
 let currentProducts = [];
 let currentPagination = {};
 
+let brands_names = ['All','1083','adresse','coteleparis','dedicated','loom'];
+let favorites = [];
+
 // instantiate the selectors
 const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 const selectBrand = document.querySelector('#brand-select');
-
+const selectSort = document.querySelector('#sort-select');
+//const selectRecentDate = document.querySelector('#date-asc');
+//const selectReasonable = document.querySelector('#price-asc');
+//const selectPriceSort = document.querySelector('#price');
+//const selectDateSort = document.querySelector('#date');
 /**
  * Set global value
  * @param {Array} result - products to display
@@ -91,16 +98,17 @@ const renderPagination = pagination => {
  * Render page selector
  * @param  {Object} pagination
  */
-const renderIndicators = pagination => {
+const renderIndicators = (pagination,products) => {
   const {count} = pagination;
 
-  spanNbProducts.innerHTML = count;
+  spanNbProducts.innerHTML = count;//products.length*(currentPagination.pageCount-1) ; 
+  //have to add to the calculation the number of products on the last page)
 };
 
 const render = (products, pagination) => {
   renderProducts(products);
   renderPagination(pagination);
-  renderIndicators(pagination);
+  renderIndicators(pagination,products);
 };
 
 /**
@@ -115,6 +123,7 @@ selectShow.addEventListener('change', event => {
   fetchProducts(1, parseInt(event.target.value))
     .then(setCurrentProducts)
     .then(() => render(currentProducts, currentPagination));
+  spanNbProducts.innerHTML = currentProducts.count;
 });
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -137,50 +146,163 @@ selectPage.addEventListener('change', event => {
 
 //Feature 2
 
-const renderBrand = brands => {
-  const {currentBrand} = brands;
-  const options = Array.from(
-    {'brands':currentBrand},
-    (value,index) => `<option value="${index}">${index}</option>` ).join('');
-    
-  sectionProducts.innerHTML = options;
-  sectionProducts.selectedBrand = currentBrand; 
-}
 
-const renderProductsBrand = (brand_sent, products) => {
-  const fragment = document.createDocumentFragment();
-  const div = document.createElement('div');
-  const template = products
-    .map(product => {
-      if(product.brand == brand_sent)
-      {
-      return `
-      <div class="product" id=${product.uuid}>
-        <span>${product.brand}</span>
-        <a href="${product.link}">${product.name}</a>
-        <span>${product.price}</span>
-      </div>
-    `
-      };
-    })
-    .join('');
-
-  div.innerHTML = template;
-  fragment.appendChild(div);
-  //selectBrand.innerHTML = '<h2>Products</h2>';
-  selectBrand.appendChild(fragment);
-};
-
-const render2 = (brand,products, pagination) => {
-  renderProductsBrand(brand, products);
-  renderPagination(pagination);
-  renderIndicators(pagination);
-  renderBrand(brands);
-};
-
-
+/*
 selectBrand.addEventListener('change', event => {
   fetchProducts(1, parseInt(event.target.value))
     .then(setCurrentProducts)
     .then(() => render2(currentBrand, currentProducts, currentPagination));
 });
+*/
+
+selectBrand.addEventListener('change', async(event) => {
+  
+  var products = await   fetchProducts(currentPagination.currentPage,currentPagination.pageCount)
+  setCurrentProducts(products)
+  if(event.target.value!='selection')
+  {
+  var filtered =currentProducts.filter(function(item){return item.brand==event.target.value});
+  render(filtered, currentPagination);
+  }
+  if(event.target.value=='all')
+  {
+    render(currentProducts, currentPagination);
+  }
+});
+
+
+// Feature 3 by recents
+
+
+
+let actual = new Date();
+selectSort.addEventListener('change', async(event) => {
+  var products = await   fetchProducts(currentPagination.currentPage,currentPagination.pageCount)
+  setCurrentProducts(products)
+  if(event.target.value=="recents")
+  {
+  var filtered =currentProducts.filter(item => actual-new Date(item.released)<=12096e5);
+  render(filtered, currentPagination);
+  }
+  if(event.target.value=="date-desc")
+  {
+  var filtered =currentProducts.sort(compareDate);
+  render(filtered, currentPagination);
+  }
+  if(event.target.value=="date-asc")
+  {
+  var filtered =currentProducts.sort(compareDate2);
+  render(filtered, currentPagination);
+  }
+ });
+
+
+
+
+//Feature 4 by reasonable price
+
+
+selectSort.addEventListener('change', async(event) => {
+  var products = await   fetchProducts(currentPagination.currentPage,currentPagination.pageCount)
+  setCurrentProducts(products)
+  if(event.target.value=="reasonable")
+  {
+  var filtered =currentProducts.filter(item => item.price <=50);
+  render(filtered, currentPagination);
+  }
+  if(event.target.value == 'price-asc')
+  {
+    var filtered =currentProducts.sort(compare);
+    render(filtered, currentPagination);
+  }
+  if(event.target.value == 'price-desc')
+  {
+    var filtered =currentProducts.sort(compare2);
+    render(filtered, currentPagination);
+  }
+  if(event.target.value == 'selection')
+  {
+    render(currentProducts, currentPagination);
+  }
+ });
+
+
+
+ //Feature 5 sort by price 
+
+
+ function compare(a, b) {
+  return a.price - b.price;
+}
+function compare2(a, b) {
+  return b.price - a.price;
+}
+
+
+
+// Feature 6 sort by date 
+
+
+
+function compareDate (a,b){
+  datea = new Date(a.date)
+  dateb = new Date(b.date)
+  return datea>dateb ? -1 : datea<dateb ? 1:0
+
+}
+
+function compareDate2 (a,b){
+  datea = new Date(a.date)
+  dateb = new Date(b.date)
+  return dateb>datea ? -1 : dateb<datea ? 1:0
+
+}
+
+
+
+//Feature 8
+
+//spanNbProducts.innerHTML= 
+
+
+
+
+//Feature 10 :
+
+function pvalues(products,q){
+  a= product.length*q /100;
+  b = Math.floor(a);
+  val = currentProducts.sort(compare)[b];
+  return val
+}
+
+
+//Have to change the value displayed by the indicators
+
+
+
+//Feature 11 : 
+
+
+
+
+
+
+//Feature 12 :
+
+
+
+
+//Feature 13 : favorite 
+
+
+function favorite(product){
+  favorites.push(product);
+  // how to keep the favorite list ?
+
+  
+  alert('The product was added to your favorites !');
+}
+
+
+

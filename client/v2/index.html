@@ -25,6 +25,8 @@
         <div id="brand">
           <label for="brand-select">By brands:</label>
           <select name="brand" id="brand-select"> 
+            <option value="selection">Selection</option>
+            <option value="all">All</option>
             <option value="1083">1083</option>
             <option value="adresse">Adresse</option>
             <option value="coteleparis">Coteleparis</option>
@@ -36,10 +38,15 @@
       <div id="sort">
         <label for="sort-select">Sort:</label>
         <select name="sort" id="sort-select">
+          <option value="selection">Selection</option>
           <option value="price-asc">Cheaper</option>
           <option value="price-desc">Expensive</option>
           <option value="date-asc">Recently released</option>
           <option value="date-desc">Anciently released</option>
+          <option value="price">Sorted by price</option>
+          <option value="date">Sorted by date</option>
+          <option value="reasonable">Reasonable price</option>
+          <option value="recents">Recent released</option>
         </select>
       </div>
     </section>
