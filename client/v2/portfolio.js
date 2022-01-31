@@ -114,14 +114,20 @@ const render = (products, pagination) => {
 
 /**
  * Select the number of products to display
- * @type {[type]}
  */
+
 selectShow.addEventListener('change', event => {
   fetchProducts(1, parseInt(event.target.value))
     .then(setCurrentProducts)
     .then(() => render(currentProducts, currentPagination));
-  spanNbProducts.innerHTML = currentProducts.count;
-});
+  spanNbProducts.innerHTML = currentProducts.count});
+/*
+selectShow.addEventListener('change', async (event) => {
+  const products = await fetchProducts(currentPagination.currentPage, parseInt(event.target.value));
+
+  setCurrentProducts(products);
+  render(currentProducts, currentPagination);
+});*/
 
 document.addEventListener('DOMContentLoaded', async () => {
   const products = await fetchProducts();
