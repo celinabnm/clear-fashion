@@ -302,7 +302,7 @@ function favorite(product){
 }
 
 // Feature 14 : filter by favorite 
-
+//utiliser le localstorage
 
 selectSort.addEventListener('change', async(event) => {
   var products = await   fetchProducts(currentPagination.currentPage,currentPagination.pageCount)
