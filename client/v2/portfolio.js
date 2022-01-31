@@ -15,10 +15,7 @@ const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 const selectBrand = document.querySelector('#brand-select');
 const selectSort = document.querySelector('#sort-select');
-//const selectRecentDate = document.querySelector('#date-asc');
-//const selectReasonable = document.querySelector('#price-asc');
-//const selectPriceSort = document.querySelector('#price');
-//const selectDateSort = document.querySelector('#date');
+const selectFavorite = document.querySelector('#favorite_prod');
 /**
  * Set global value
  * @param {Array} result - products to display
@@ -300,9 +297,20 @@ function favorite(product){
   favorites.push(product);
   // how to keep the favorite list ?
 
-  
+
   alert('The product was added to your favorites !');
 }
 
+// Feature 14 : filter by favorite 
 
+
+selectSort.addEventListener('change', async(event) => {
+  var products = await   fetchProducts(currentPagination.currentPage,currentPagination.pageCount)
+  setCurrentProducts(products)
+  // have to adapt it to the favorite products : have also to adapt the products on the page
+  if(event.target.value=="reasonable")
+  {
+    render(favorites, currentPagination);
+  }
+});
 
