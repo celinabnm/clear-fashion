@@ -10,6 +10,7 @@ const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
+const selectBrand = document.querySelector('#brand-select');
 
 /**
  * Set global value
@@ -133,5 +134,53 @@ selectPage.addEventListener('change', event => {
     .then(() => render(currentProducts, currentPagination));
 });
 
-sectionProducts.addEventListener()
 
+//Feature 2
+
+const renderBrand = brands => {
+  const {currentBrand} = brands;
+  const options = Array.from(
+    {'brands':currentBrand},
+    (value,index) => `<option value="${index}">${index}</option>` ).join('');
+    
+  sectionProducts.innerHTML = options;
+  sectionProducts.selectedBrand = currentBrand; 
+}
+
+const renderProductsBrand = (brand_sent, products) => {
+  const fragment = document.createDocumentFragment();
+  const div = document.createElement('div');
+  const template = products
+    .map(product => {
+      if(product.brand == brand_sent)
+      {
+      return `
+      <div class="product" id=${product.uuid}>
+        <span>${product.brand}</span>
+        <a href="${product.link}">${product.name}</a>
+        <span>${product.price}</span>
+      </div>
+    `
+      };
+    })
+    .join('');
+
+  div.innerHTML = template;
+  fragment.appendChild(div);
+  //selectBrand.innerHTML = '<h2>Products</h2>';
+  selectBrand.appendChild(fragment);
+};
+
+const render2 = (brand,products, pagination) => {
+  renderProductsBrand(brand, products);
+  renderPagination(pagination);
+  renderIndicators(pagination);
+  renderBrand(brands);
+};
+
+
+selectBrand.addEventListener('change', event => {
+  fetchProducts(1, parseInt(event.target.value))
+    .then(setCurrentProducts)
+    .then(() => render2(currentBrand, currentProducts, currentPagination));
+});
