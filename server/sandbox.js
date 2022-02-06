@@ -1,6 +1,7 @@
 /* eslint-disable no-console, no-process-exit */
 const dedicatedbrand = require('./sources/dedicatedbrand');
 const montlimartbrand = require('./sources/montlimartbrand');
+const adresseparisbrand = require('./sources/adresseparisbrand');
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
 
@@ -9,7 +10,7 @@ async function sandbox (eshop = 'https://www.dedicatedbrand.com/en/men/news') {
   try {
     console.log(`🕵️‍♀️  browsing ${eshop} source`);
 
-    const products = await montlimartbrand.scrape(eshop);
+    const products = await adresseparisbrand.scrape(eshop);
 
     console.log(products);
     console.log('done');
