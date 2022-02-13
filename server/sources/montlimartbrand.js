@@ -9,16 +9,15 @@ const cheerio = require('cheerio');
 const parse = data => {
   const $ = cheerio.load(data);
 
-  return $('.category-products .item')
-    .map(element => {
+  return $('.main-container .category-products .item .product-info')
+    .map(element => { console.log(element);
       const name = $(element)
-        .find('product-info.product-name')
-        .text()
-        .trim()
-        .replace(/\s/g, ' ');
+        .find('.product-name')
+        .text();
+        
       const price = parseInt(
         $(element)
-          .find('item.product-info.price-box')
+          .find('.price-box')
           .text()
       );
 
@@ -38,7 +37,7 @@ module.exports.scrape = async url => {
 
     if (response.ok) {
       const body = await response.text();
-
+      console.log(body);
       return parse(body);
     }
 

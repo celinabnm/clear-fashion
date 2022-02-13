@@ -12,17 +12,22 @@ const parse = data => {
   return $('.product-container')
     .map((i, element) => {
       const name = $(element)
-        .find('.product-name-title')
-        .text()
-        .trim()
-        .replace(/\s/g, ' ');
+        .find('.product-name')
+        .attr('title');
+        
       const price = parseInt(
         $(element)
           .find('.span.price product-price')
           .text()
       );
+      const link = $(element)
+        .find('.product-name')
+        .attr('href');
+      const link_img = $(element)
+        .find('.product_img_link img')
+        .attr('src');
 
-      return {name, price};
+      return {name, price, link};
     })
     .get();
 };

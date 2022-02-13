@@ -7,12 +7,14 @@ const cheerio = require('cheerio');
 
 
 async function sandbox //(eshop='https://www.dedicatedbrand.com/en/men/all-men?p=') {
-(eshop = 'https://www.dedicatedbrand.com/en/men/news') {
-  try {
+//(eshop = 'https://www.dedicatedbrand.com/en/men/news') {
+//(eshop ='https://www.montlimart.com/toute-la-collection.html'){
+  (eshop ='https://adresse.paris/602-nouveautes'){  
+try {
     console.log(`🕵️‍♀️  browsing ${eshop} source`);
 
     //for(var i =1;i<)
-    const products = await dedicatedbrand.scrape(eshop);
+    const products = await adresseparisbrand.scrape(eshop);
 
     console.log(products);
     console.log('done');
