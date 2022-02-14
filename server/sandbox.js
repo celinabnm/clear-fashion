@@ -26,12 +26,23 @@ try {
     console.log(`🕵️‍♀️  browsing ${eshop} source`);
     const products_adresse = await adresseparisbrand.scrape(eshop);
 
+    
     console.log(products_dedi);
     console.log(products_mont);
     console.log(products_adresse);
 
     const products = products_dedi.concat(products_adresse, products_mont);
-    await fs.writeFileSync('products.json', JSON.stringify(products));
+    let final = [];
+    for(let i =0;i<products.length;i++)
+    {
+      if(products[i].price !=NaN)
+      {
+        console.log(products[i].price);
+        final.push(products[i]);
+      }
+    }
+
+    await fs.writeFileSync('products.json', JSON.stringify(final));
 
     console.log('done');
     process.exit(0);
