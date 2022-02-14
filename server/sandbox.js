@@ -4,6 +4,7 @@ const montlimartbrand = require('./sources/montlimartbrand');
 const adresseparisbrand = require('./sources/adresseparisbrand');
 const fetch = require('node-fetch');
 const cheerio = require('cheerio');
+const fs = require('fs');
 
 
 async function sandbox //(eshop='https://www.dedicatedbrand.com/en/men/all-men?p=') {
@@ -17,6 +18,7 @@ try {
     const products = await adresseparisbrand.scrape(eshop);
 
     console.log(products);
+    fs.writeFileSync('products.json', JSON.stringify(products));
     console.log('done');
     process.exit(0);
   } catch (e) {
