@@ -101,10 +101,11 @@ module.exports.scrape = async url => {
       const body = await response.text();
       //console.log(body);
       result = parse(body);
+      /*
       const productsNb = new String(parse2(body));
       console.log(productsNb + ' : productsNB');
 
-      /*
+      
       const response2 = await fetch('https://www.dedicatedbrand.com/en/loadfilter?category=men%2Fall-men');
       const body2 = await response2.text();
       */

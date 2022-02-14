@@ -17,8 +17,9 @@ const parse = data => {
         
       const price = parseInt(
         $(element)
-          .find('.span.price product-price')
+          .find('.price.product-price')
           .text()
+          .replace(' € ','')
       );
       const link = $(element)
         .find('.product-name')
@@ -27,7 +28,7 @@ const parse = data => {
         .find('.product_img_link img')
         .attr('src');
 
-      return {name, price, link};
+      return {name, price, link, link_img};
     })
     .get();
 };
