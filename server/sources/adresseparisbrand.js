@@ -33,6 +33,14 @@ const parse = data => {
     .get();
 };
 
+/*
+const parseNb = info => {
+const $ = cheerio.load(info);
+
+  return $('div .input').attr('value');
+
+} */
+
 /**
  * Scrape all the products for a given url page
  * @param  {[type]}  url
