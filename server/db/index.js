@@ -2,9 +2,12 @@ require('dotenv').config();
 const {MongoClient} = require('mongodb');
 const fs = require('fs');
 
-const MONGODB_DB_NAME = 'clearfashion';
-const MONGODB_COLLECTION = 'products';
+const MONGODB_DB_NAME = 'ClearFashion';
+const MONGODB_COLLECTION = 'first_file_scrapping';
 const MONGODB_URI = process.env.MONGODB_URI;
+
+
+
 
 let client = null;
 let database = null;
@@ -60,12 +63,12 @@ module.exports.insert = async products => {
  * @param  {Array}  query
  * @return {Array}
  */
-module.exports.find = async query => {
+module.exports.find = async (query,limit=12) => {
   try {
     const db = await getDB();
     const collection = db.collection(MONGODB_COLLECTION);
-    const result = await collection.find(query).toArray();
-
+    const result = await collection.find(query).limit(limit).toArray();
+    //limit will be used in api.js to simplify the use of the function 
     return result;
   } catch (error) {
     console.error('🚨 collection.find...', error);
