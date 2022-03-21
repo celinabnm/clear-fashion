@@ -58,6 +58,7 @@ try {
       eshop ='https://adresse.paris/630-toute-la-collection?p='+i.toString();
       console.log(`🕵️‍♀️  browsing ${eshop} source`);
       const products_adresse = await adresseparisbrand.scrape(eshop);
+      console.log(products_adresse);
       products_adresse_total = products_adresse_total.concat(products_adresse);
     }
 
