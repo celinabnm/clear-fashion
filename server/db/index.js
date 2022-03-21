@@ -4,8 +4,8 @@ const fs = require('fs');
 
 const MONGODB_DB_NAME = 'ClearFashion';
 const MONGODB_COLLECTION = 'first_file_scrapping';
-//const MONGODB_URI = process.env.MONGODB_URI;
-const MONGODB_URI = 'mongodb+srv://celina:celina93@cluster0.xfst6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const MONGODB_URI = process.env.MONGODB_URI;
+
 
 
 
