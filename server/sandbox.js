@@ -8,14 +8,14 @@ const fs = require('fs');
 
 
 async function sandbox (){//eshop='https://www.dedicatedbrand.com/en/men/all-men?p=') {
-//connecting to the database
+/*connecting to the database
   const {MongoClient} = require('mongodb');
   const MONGODB_URI = '';
   const MONGODB_DB_NAME = 'ClearFashion';
   const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
   const db =  client.db(MONGODB_DB_NAME);
   console.log("successfully initiliazed")
-//
+*/
 
 try {
 
@@ -91,8 +91,8 @@ try {
     
     console.log('done');
 
-    const collection = db.collection('first_file_scrapping');
-    const result = collection.insertMany(final);
+    //const collection = db.collection('first_file_scrapping');
+    //const result = collection.insertMany(final);
     console.log(result);
 
     process.exit(0);
