@@ -33,7 +33,7 @@ const setCurrentProducts = (products) => {
 
 
 const fetchProducts = async (limit = nbrProduct, brand ,price) => {
-  let url= 'https://test2-nine-iota.vercel.app/product/search?'
+  let url= 'https://clear-fashion-final.vercel.app/product/search?'
   if(typeof brand !== 'undefined'){
       url += `&brand=${brand}`
     }
