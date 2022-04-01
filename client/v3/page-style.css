@@ -1,0 +1,44 @@
+div { text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+    }
+    h1 { 
+    text-align: center;
+    font-family:Arial, Helvetica, sans-serif;
+     }
+    h2 { text-align: center;
+    font-family:Arial, Helvetica, sans-serif;}
+    .box {
+            width: 120px;
+            height: 30px;
+            border: 1px solid rgb(29, 1, 1);
+            font-size: 18px;
+            color: #1c87c9;
+            background-color: rgb(36, 21, 21);
+            border-radius: 5px;
+            box-shadow: 4px 4px rgb(18, 8, 55);
+    }
+    label{font-family:Arial, Helvetica, sans-serif ;
+    color:rgb(40, 20, 90);
+    font-style:italic;
+    }
+    .border{ 
+    border: 5px solid rgb(32, 1, 85); padding: 5px;
+    border-radius: 10% / 50%;
+     }
+    
+    #options{
+    position: fixed; 
+    left:5px;
+    top:50px
+    }
+    #test{
+    background-color: hsl(0, 0%, 95%);
+      width: 85%;
+      max-width: 48rem;
+      margin: auto;
+      color: hsl(280, 16%, 26%);
+      border: 1px solid hsl(266, 94%, 14%);
+    }
+    body{
+    background-image:url(https://i.pinimg.com/564x/9c/03/f9/9c03f9ed039d58a4133027495e91119c.jpg)
+    }
